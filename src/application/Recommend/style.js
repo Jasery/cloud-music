@@ -38,3 +38,10 @@ export const ListItem = styled.div`
     color: ${style['font-color-desc']}
   }
 `;
+
+export const Content = styled.div`
+  position: fixed;
+  top: 90px;
+  bottom: 0;
+  width: 100%;
+`

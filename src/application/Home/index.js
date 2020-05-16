@@ -14,7 +14,7 @@ function Home(props) {
       </Top>
       <Tab>
         <NavLink to="/recommend" activeClassName="selected">
-          <TabItem><span>推举</span></TabItem>
+          <TabItem><span>推荐</span></TabItem>
         </NavLink>
         <NavLink to="/singers" activeClassName="selected">
           <TabItem><span>歌手</span></TabItem>

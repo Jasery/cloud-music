@@ -33,7 +33,7 @@ function Slider(props) {
             bannerList.map(slider => (
               <div className="swiper-slide" key={slider.imageUrl}>
                 <div className="slider-nav">
-                  <img src={slider.imageUrl} width="100%" alt="推举" height="100%"/>
+                  <img src={slider.imageUrl} width="100%" alt="推荐" height="100%"/>
                 </div>
               </div>
             ))

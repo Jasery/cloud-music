@@ -1,7 +1,8 @@
 import React from "react";
 import Slider from "../../components/slider";
-import {List, ListItem, ListWrapper} from "./style";
+import {Content, List, ListItem, ListWrapper} from "./style";
 import {getCount} from "../../utils/utils";
+import Scroll from "../../components/scroll";
 
 function Recommend(props) {
 
@@ -13,7 +14,7 @@ function Recommend(props) {
     imageUrl: 'http://p1.music.126.net/_u-1Yr1Yh8feA4iGm8krnw==/109951164977440366.jpg'
   }];
 
-  const recommendList = [{
+  let recommendList = [{
     id: 1,
     picUrl: 'https://p2.music.126.net/IsMJ_kJVGOYMTi8VrThL_Q==/109951164968788000.jpg?param=300x300',
     playCount: 12334,
@@ -34,30 +35,33 @@ function Recommend(props) {
     playCount: 345343,
     name: '我。。。想你了。。。'
   }];
-
-
+  recommendList = [...recommendList, ...recommendList,...recommendList]
   return (
-    <div>
-      <Slider bannerList={bannerList}></Slider>
-      <ListWrapper>
-        <h1 className="title">推荐歌单</h1>
-        <List>
-          {recommendList.map( item  => (
-            <ListItem key={item.id}>
-              <div className="img-wrapper">
-                <div className="decorate"></div>
-                <img src={item.picUrl} width="100%" height="100%" alt="music"/>
-              </div>
-              <div className="play-count">
-                <i className="iconfont play">&#xe885;</i>
-                <span className="count">{getCount(item.playCount)}</span>
-              </div>
-              <div className="desc">{item.name}</div>
-            </ListItem>
-          ))}
-        </List>
-      </ListWrapper>
-    </div>
+    <Content>
+      <Scroll>
+        <div>
+          <Slider bannerList={bannerList}></Slider>
+          <ListWrapper>
+            <h1 className="title">推荐歌单</h1>
+            <List>
+              {recommendList.map( item  => (
+                <ListItem key={item.id + Math.random()}>
+                  <div className="img-wrapper">
+                    <div className="decorate"></div>
+                    <img src={item.picUrl} width="100%" height="100%" alt="music"/>
+                  </div>
+                  <div className="play-count">
+                    <i className="iconfont play">&#xe885;</i>
+                    <span className="count">{getCount(item.playCount)}</span>
+                  </div>
+                  <div className="desc">{item.name}</div>
+                </ListItem>
+              ))}
+            </List>
+          </ListWrapper>
+        </div>
+      </Scroll>
+    </Content>
   )
 }
 
