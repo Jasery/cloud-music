@@ -1,17 +1,10 @@
-import axios from "axios";
+import request from "./request"
 
-const axiosInstance = axios.create({
-  timeout: 5000
-});
+export const getBanner = () => {
+  return request.get("/banner");
+};
 
-axiosInstance.interceptors.response.use(
-  response => {
-    return response.data;
-  },
-  error => {
-    console.log("请求错误", error);
-    return Promise.reject(error);
-  }
-);
+export const getPersonalized = () => {
+  return request.get('/personalized')
+};
 
-export default axiosInstance;

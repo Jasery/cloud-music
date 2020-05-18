@@ -7,7 +7,7 @@ import Swiper from "swiper"
 
 function Slider(props) {
   const { bannerList } = props;
-
+  console.log('into slider', bannerList);
   const [sliderSwiper, setSliderSwiper] = useState(null);
   useEffect(() => {
     if (bannerList.length && !sliderSwiper) {
