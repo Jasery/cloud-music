@@ -5,6 +5,7 @@ import {getCount} from "../../utils/utils";
 import Scroll from "../../components/scroll";
 import {connect} from "react-redux";
 import {actionCreators} from "./store";
+import LazyLoad, {forceCheck} from "react-lazyload";
 
 
 function Recommend(props) {
@@ -15,13 +16,14 @@ function Recommend(props) {
   useEffect(() => {
     getBannerDataDispatch();
     getRecommendListDataDispatch();
+    // eslint-disable-next-line
   }, []);
 
   bannerList = bannerList ? bannerList.toJS () : [];
   recommendList = recommendList ? recommendList.toJS () :[];
   return (
     <Content>
-      <Scroll>
+      <Scroll onScroll={forceCheck}>
         <div>
           <Slider bannerList={bannerList}></Slider>
           <ListWrapper>
@@ -31,7 +33,9 @@ function Recommend(props) {
                 <ListItem key={item.id + Math.random()}>
                   <div className="img-wrapper">
                     <div className="decorate"></div>
-                    <img src={item.picUrl} width="100%" height="100%" alt="music"/>
+                    <LazyLoad placeholder={<img src={require('./music.png')} width="200px" height="200px" alt=""/>}>
+                      <img src={item.picUrl} width="100%" height="100%" alt="music"/>
+                    </LazyLoad>
                   </div>
                   <div className="play-count">
                     <i className="iconfont play">&#xe885;</i>

@@ -2,9 +2,11 @@ import styled from "styled-components";
 import style from "../../assets/global-style"
 
 export const ListWrapper = styled.div`
+  max-width: 100%;
   h1 {
     margin: 20px 0 20px 5px;
     font-weight: bold;
+    color: ${style["font-color"]};
   }
 `;
 
@@ -44,4 +46,15 @@ export const Content = styled.div`
   top: 90px;
   bottom: 0;
   width: 100%;
+  overflow: auto;
+  .item {
+    width: 100px;
+    height: 100px;
+    background-color: aqua;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+  }
 `
