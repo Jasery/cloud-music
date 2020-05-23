@@ -6,30 +6,36 @@ import Scroll from "../../components/scroll";
 import {connect} from "react-redux";
 import {actionCreators} from "./store";
 import LazyLoad, {forceCheck} from "react-lazyload";
+import Loading from "../../components/loading";
 
 
 function Recommend(props) {
 
-  let { bannerList, recommendList } = props;
+  let { bannerList, recommendList, enterLoading } = props;
   let { getBannerDataDispatch, getRecommendListDataDispatch } = props;
 
   useEffect(() => {
-    getBannerDataDispatch();
-    getRecommendListDataDispatch();
+    console.log(bannerList);
+    if (!bannerList.size) {
+      getBannerDataDispatch();
+    }
+    if (!recommendList.size) {
+      getRecommendListDataDispatch();
+    }
     // eslint-disable-next-line
   }, []);
 
-  bannerList = bannerList ? bannerList.toJS () : [];
-  recommendList = recommendList ? recommendList.toJS () :[];
+  const bannerListJS = bannerList ? bannerList.toJS () : [];
+  const recommendListJS = recommendList ? recommendList.toJS () :[];
   return (
     <Content>
       <Scroll onScroll={forceCheck}>
         <div>
-          <Slider bannerList={bannerList}></Slider>
+          <Slider bannerList={bannerListJS}></Slider>
           <ListWrapper>
             <h1 className="title">推荐歌单</h1>
             <List>
-              {recommendList.map( item  => (
+              {recommendListJS.map( item  => (
                 <ListItem key={item.id + Math.random()}>
                   <div className="img-wrapper">
                     <div className="decorate"></div>
@@ -48,13 +54,15 @@ function Recommend(props) {
           </ListWrapper>
         </div>
       </Scroll>
+      { enterLoading ? <Loading></Loading> : null }
     </Content>
   )
 }
 
 const mapStateToProps = state => ({
   bannerList: state.getIn(['recommend', 'bannerList']),
-  recommendList: state.getIn(['recommend', 'recommendList'])
+  recommendList: state.getIn(['recommend', 'recommendList']),
+  enterLoading: state.getIn (['recommend', 'enterLoading'])
 });
 
 const mapDispatchToProps = dispatch => ({

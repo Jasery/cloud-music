@@ -1,9 +1,10 @@
-import { CHANGE_BANNER, CHANGE_RECOMMEND_LIST } from "./constant";
+import { CHANGE_BANNER, CHANGE_RECOMMEND_LIST, CHANGE_ENTER_LOADING } from "./constant";
 import {fromJS} from "immutable";
 
 const defaultState = fromJS({
   bannerList: [],
-  recommendList: []
+  recommendList: [],
+  enterLoading: true
 });
 
 export default (state = defaultState, action) => {
@@ -12,6 +13,8 @@ export default (state = defaultState, action) => {
       return state.set('bannerList', action.data);
     case CHANGE_RECOMMEND_LIST:
       return state.set('recommendList', action.data);
+    case CHANGE_ENTER_LOADING:
+      return state.set("enterLoading", action.data);
     default:
       return state;
   }
